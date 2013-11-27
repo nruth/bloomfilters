@@ -79,8 +79,8 @@ class TestBloomfilter < Test::Unit::TestCase
     assert filter.lookup(3)
     assert filter.lookup(4)
     assert filter.lookup('foo')
-    refute filter.lookup(2)
-    refute filter.lookup(5)
-    refute filter.lookup('bar')
+    
+    expected_failures = [2, 5, 'bar']
+    refute expected_failures.all? {|x| filter.lookup(x)}
   end 
 end
