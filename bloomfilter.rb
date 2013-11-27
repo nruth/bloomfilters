@@ -31,7 +31,9 @@ class Bloomfilter
   
   # does the filter contain the pattern's 1 bits?
   def matches?(pattern)
-    pattern.zip(filter).all? {|patternbit, filterbit| if patternbit==1 then filterbit==1 else true end }
+    pattern.zip(filter).all? {|patternbit, filterbit| 
+      if patternbit==1 then filterbit==1 else true end 
+    }
   end
 
   # more ruby-like api
