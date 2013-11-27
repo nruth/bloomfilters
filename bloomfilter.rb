@@ -47,7 +47,7 @@ class Bloomfilter
   def hash(obj)
     obj = normalise(obj)
     indices = [Digest::SHA1, Digest::MD5].map do |hasher|
-      hasher.digest(obj).unpack("N").first
+      hasher.digest(obj).unpack("N*").reduce {|accum, n| (accum+n)%filter.length}
     end
     indices << Zlib::crc32(obj)
     pattern = empty_pattern(filter.length)
